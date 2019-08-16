@@ -63,6 +63,8 @@ class QRCodeReader {
   }
 
   Future<String> scan() async {
+
+
     Map params = <String, dynamic>{
       "autoFocusIntervalInMs": _autoFocusIntervalInMs,
       "forceAutoFocus": _forceAutoFocus,

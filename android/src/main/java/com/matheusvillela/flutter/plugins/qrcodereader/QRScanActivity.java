@@ -24,12 +24,18 @@ import android.app.Activity;
 import android.content.Intent;
 import android.graphics.PointF;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
+import android.support.design.widget.BottomNavigationView;
+import android.support.v7.app.ActionBar;
+import android.support.v7.app.AppCompatActivity;
+import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.widget.Button;
 
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
 
-public class QRScanActivity extends Activity implements QRCodeReaderView.OnQRCodeReadListener {
+public class QRScanActivity extends AppCompatActivity implements QRCodeReaderView.OnQRCodeReadListener {
 
     private boolean qrRead;
     private QRCodeReaderView view;
@@ -44,15 +50,18 @@ public class QRScanActivity extends Activity implements QRCodeReaderView.OnQRCod
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_read);
-        view = findViewById(R.id.activity_qr_read_reader);
-        Button btnCancel = findViewById(R.id.btnCancel);
 
-        btnCancel.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
+        view = findViewById(R.id.activity_qr_read_reader);
+
+        Window window = this.getWindow();
+//        window.setStatusBarColor(0xffffff00);
+
+        ActionBar actionBar = getSupportActionBar();
+        if (actionBar != null){
+            actionBar.setHomeButtonEnabled(false);
+            actionBar.setTitle(R.string.title);
+            actionBar.setDisplayHomeAsUpEnabled(true);
+        }
 
         Intent intent = getIntent();
         view.setOnQRCodeReadListener(this);
@@ -65,6 +74,16 @@ public class QRScanActivity extends Activity implements QRCodeReaderView.OnQRCod
         if (intent.getBooleanExtra(EXTRA_FRONT_CAMERA, false)) {
             view.setFrontCamera();
         }
+    }
+
+
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        if (item.getItemId() == android.R.id.home){
+            this.finish();
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     @Override

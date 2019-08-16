@@ -33,6 +33,7 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'QRCode Reader Demo',
       home: new MyHomePage(),
+      theme: ThemeData.light(),
     );
   }
 }
@@ -54,6 +55,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    final color = Theme.of(context).primaryColor;
+
     return new Scaffold(
       appBar: new AppBar(
         title: const Text('QRCode Reader Example'),
