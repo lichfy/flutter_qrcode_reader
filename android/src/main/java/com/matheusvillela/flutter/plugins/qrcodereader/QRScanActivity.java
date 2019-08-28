@@ -22,15 +22,19 @@ package com.matheusvillela.flutter.plugins.qrcodereader;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.graphics.PointF;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 
 import com.dlazaro66.qrcodereaderview.QRCodeReaderView;
@@ -46,24 +50,33 @@ public class QRScanActivity extends AppCompatActivity implements QRCodeReaderVie
     public static String EXTRA_FORCE_FOCUS = "extra_force_focus";
     public static String EXTRA_TORCH_ENABLED = "extra_torch_enabled";
     public static String EXTRA_FRONT_CAMERA = "extra_front_camera";
+    public static String EXTRA_PRIMARY_COLOR = "extra_primary_color";
 
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_qr_read);
 
         view = findViewById(R.id.activity_qr_read_reader);
+        Intent intent = getIntent();
 
-        Window window = this.getWindow();
-//        window.setStatusBarColor(0xffffff00);
+        long color = intent.getLongExtra(EXTRA_PRIMARY_COLOR,0);
+
+        if (color != 0) {
+            Window window = this.getWindow();
+            window.addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
+            window.setStatusBarColor((int)color);
+        }
 
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null){
             actionBar.setHomeButtonEnabled(false);
             actionBar.setTitle(R.string.title);
             actionBar.setDisplayHomeAsUpEnabled(true);
+            if (color != 0){
+                actionBar.setBackgroundDrawable(new ColorDrawable((int)color));
+            }
         }
 
-        Intent intent = getIntent();
         view.setOnQRCodeReadListener(this);
         view.setQRDecodingEnabled(true);
         if (intent.getBooleanExtra(EXTRA_FORCE_FOCUS, false)) {

@@ -1,21 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <style name="Theme.View" parent="@style/Theme.AppCompat.Light">
-        <!--<item name="android:windowTranslucentStatus">true</item>-->
-        <!--<item name="android:windowTranslucentNavigation">true</item>-->
-        <item name="android:statusBarColor">@color/colorPrimary</item>
+    <style name="Theme.View" parent="@style/Theme.AppCompat">
+        <!--<item name="android:statusBarColor">@color/colorPrimary</item>-->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimary</item>
-        <item name="actionBarStyle">@style/ActionTitle</item>
-
     </style>
 
-    <style name="ActionTitle" parent="@style/Widget.AppCompat.ActionBar.Solid">
-        <item name="titleTextStyle">@style/ActionTitleStyle</item>
-        <item name="elevation">1dp</item>
-    </style>
 
-    <style name="ActionTitleStyle" parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
-        <item name="android:textColor">#ffffff</item>
-    </style>
 </resources>

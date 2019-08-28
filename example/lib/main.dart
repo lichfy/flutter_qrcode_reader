@@ -33,7 +33,9 @@ class MyApp extends StatelessWidget {
     return new MaterialApp(
       title: 'QRCode Reader Demo',
       home: new MyHomePage(),
-      theme: ThemeData.light(),
+      theme: ThemeData.light().copyWith(
+        primaryColor: Colors.deepOrange
+      ),
     );
   }
 }
@@ -77,6 +79,7 @@ class _MyHomePageState extends State<MyHomePage> {
                 .setHandlePermissions(true)
                 .setExecuteAfterPermissionGranted(true)
                 .setFrontCamera(false)
+                .setPrimaryColor(color.value)
                 .scan();
           });
         },
