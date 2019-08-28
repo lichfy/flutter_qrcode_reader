@@ -9,6 +9,7 @@ import 'package:qrcode_reader/qrcode_reader.dart';
 ```
 
 ``` dart
+final color = Theme.of(context).primaryColor;
 Future<String> futureString = new QRCodeReader()
                .setAutoFocusIntervalInMs(200) // default 5000
                .setForceAutoFocus(true) // default false
@@ -16,6 +17,7 @@ Future<String> futureString = new QRCodeReader()
                .setHandlePermissions(true) // default true
                .setExecuteAfterPermissionGranted(true) // default true
                .setFrontCamera(false) // default false
+               .setPrimaryColor(color.value) 
                .scan();
 ```
 
