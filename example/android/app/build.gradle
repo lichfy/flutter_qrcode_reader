@@ -24,7 +24,7 @@ android {
     defaultConfig {
         minSdkVersion 21
         applicationId "com.matheusvillela.flutter.plugins.qrcodereaderexample"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
 
     buildTypes {
